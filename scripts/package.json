@@ -4,8 +4,6 @@
   "description": "Projet_6_Openclassroom",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint . --fix",
-    "lint": "eslint ./",
     "sass": "sass --watch ./sass/style.scss:./css/style.css --style compressed",
     "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
   },
@@ -19,9 +17,5 @@
   "bugs": {
     "url": "https://github.com/Fenzrael/GlennJOLLY_6_25102021/issues"
   },
-  "homepage": "https://github.com/Fenzrael/GlennJOLLY_6_25102021#readme",
-  "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0"
-  }
+  "homepage": "https://github.com/Fenzrael/GlennJOLLY_6_25102021#readme"
 }
