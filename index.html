@@ -4,27 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Link CSS-->
     <link rel="stylesheet" href="./css/style.css" />
+
+    <!--Logo Tab-->
     <link rel="icon" href="./assets/Img/Logo_Site/logo.svg" />
+
+    <!--Script FontAwesome-->
     <script
       src="https://kit.fontawesome.com/71f14f71be.js"
       crossorigin="anonymous"
     ></script>
+
+    <!--Title Internet Page-->
     <title>Les Petits Plats</title>
   </head>
+
   <body>
-    <header>
-      <div aria-label="Presentation Enterprise">
-        <img src="./assets/Img/Logo_Site/logo.svg" alt="logo" class="logo" />
-        <h1 aria-label="Enterprise Name">Les petits plats</h1>
+    <header class="header">
+      <div
+        class="header__presentation presentation"
+        aria-label="Presentation Enterprise"
+      >
+        <img
+          src="./assets/Img/Logo_Site/logo.svg"
+          alt="logo"
+          class="presentation__logo"
+        />
+        <h1 class="presentation__title" aria-label="Enterprise Name">
+          Les petits plats
+        </h1>
       </div>
       <input
         type="search"
         placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
       />
-      <input type="search" placeholder="Ingredients" id="ingredients"></input>
-      <input type="search" placeholder="Appareil" id="device"></input>
-      <input type="search" placeholder="Ustensiles" id="utensils"></input>
+      <input type="search" placeholder="Ingredients" id="ingredients" />
+      <input type="search" placeholder="Appareil " id="device" />
+      <input type="search" placeholder="Ustensiles" id="utensils" />
     </header>
+    <main>
+      <section id="recipes" class="recipes"></section>
+    </main>
+    <script type="text/javascript" src="./scripts/index.js"></script>
   </body>
 </html>

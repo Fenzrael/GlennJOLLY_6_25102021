@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Fenzrael/GlennJOLLY_6_25102021/issues"
   },
-  "homepage": "https://github.com/Fenzrael/GlennJOLLY_6_25102021#readme"
+  "homepage": "https://github.com/Fenzrael/GlennJOLLY_6_25102021#readme",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
 }
