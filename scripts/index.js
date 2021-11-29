@@ -1,3 +1,5 @@
+"use strict";
+
 const params = new URLSearchParams(document.location.search.substring(1));
 const recipes = document.getElementById("recipes");
 
@@ -9,33 +11,47 @@ let recipesData = [];
 //Import data of recipes.json
 
 const recipesInfo = async () => {
-  await fetch("./data/recipes.json")
+  return fetch("./data/recipes.json")
     .then((res) => res.json())
-    .then((data) => (recipesData = data));
-
-  console.log(recipesData);
+    .then((data) => {
+      return data;
+    });
 };
 
 const recipesDisplay = async () => {
-  await recipesInfo();
-
-  recipesData.recipe.forEach((recipe) => {
+  recipesData = await recipesInfo();
+  recipesData.recipes.forEach((recipe) => {
     recipesArray.push(recipe);
   });
 };
 
 function constructMediaHtml() {
   recipes.innerHTML = "";
-  recipesArray.forEach((recipe) => {
-    recipes.innerHTML += `
-        <figure class="recipes__card card">
-            <img class="card__image" src="./assets/Img/cook.png" alt="image"/>
-            <figcaption class="card__description">
-                ${recipe.name}${recipe.time}${recipe.ingredients}${recipe.description}
-            </figcaption>
-        </figure>
-        `;
+  recipesDisplay().then(() => {
+    recipesArray.forEach((recipe) => {
+      recipes.innerHTML += `
+            <article class="recipes__card card">
+                <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
+                <h2 class="card__title">${recipe.name}</h2>
+                <span class="far fa-clock card__time">${recipe.time}</span>
+                <aside class="card__ingredients ">${ingredientsConstructHtml(
+                  recipe.ingredients
+                )}</aside>
+                <aside class=""card__description>${recipe.description}</aside>
+            </article>
+      `;
+    });
   });
 }
-
 constructMediaHtml();
+
+const ingredientsConstructHtml = function (ingredients) {
+  return ingredients.map((currentIngredient) => {
+    return `<ul class="">
+              <li>${currentIngredient.ingredient ?? ""}</li>
+              <li>${currentIngredient.quantity ?? ""}</li>
+              <li>${currentIngredient.unit ?? ""}</li>
+            </ul>
+    `;
+  });
+};
