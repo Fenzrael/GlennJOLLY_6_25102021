@@ -34,7 +34,7 @@ function constructMediaHtml() {
                 <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
                 <h2 class="card__title">${recipe.name}</h2>
                 <span class="far fa-clock card__time">${recipe.time}</span>
-                <aside class="card__ingredients ">${ingredientsConstructHtml(
+                <aside class="card__ingredients">${ingredientsConstructHtml(
                   recipe.ingredients
                 )}</aside>
                 <aside class=""card__description>${recipe.description}</aside>
@@ -55,3 +55,5 @@ const ingredientsConstructHtml = function (ingredients) {
     `;
   });
 };
+
+// Methode for , algo 1
