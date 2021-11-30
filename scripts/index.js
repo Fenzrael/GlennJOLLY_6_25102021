@@ -34,7 +34,7 @@ function constructMediaHtml() {
                 <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
                 <h2 class="card__title">${recipe.name}</h2>
                 <span class="far fa-clock card__time">${recipe.time}</span>
-                <aside class="card__ingredients ">${ingredientsConstructHtml(
+                <aside class="card__ingredients">${ingredientsConstructHtml(
                   recipe.ingredients
                 )}</aside>
                 <aside class=""card__description>${recipe.description}</aside>
@@ -47,10 +47,14 @@ constructMediaHtml();
 
 const ingredientsConstructHtml = function (ingredients) {
   return ingredients.map((currentIngredient) => {
-    return `<ul class="">
-              <li>${currentIngredient.ingredient ?? ""}</li>
-              <li>${currentIngredient.quantity ?? ""}</li>
-              <li>${currentIngredient.unit ?? ""}</li>
+    return `<ul class="list">
+              <li class="list__ingredient">${
+                currentIngredient.ingredient ?? ""
+              }</li>
+              <li class="list__quantity">${
+                currentIngredient.quantity ?? ""
+              }</li>
+              <li class="list__unit">${currentIngredient.unit ?? ""}</li>
             </ul>
     `;
   });
