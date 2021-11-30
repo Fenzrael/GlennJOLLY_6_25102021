@@ -57,3 +57,16 @@ const ingredientsConstructHtml = function (ingredients) {
 };
 
 // Methode for , algo 1
+
+// Decoupe Probleme: Afficher recettes par ingredients, appareils, ustensiles ou nom de recette dans barre de recherche ou description
+
+// 1. Creer Arrays pour chaque categorie de recherche
+
+// 2. Creer boucle for et pour chaque iterations localiser element taper par l'utilisateur et l'isoler
+// 2.1.
+
+// 3. Supprimer Doublons
+
+// 4. Rendre recettes avec les données recherchées
+
+// 5. Supprimer données tapées dans les barres de recherches apres affichage des recettes

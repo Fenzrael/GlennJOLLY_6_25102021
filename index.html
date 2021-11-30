@@ -23,7 +23,7 @@
 
   <body>
     <header class="header">
-      <div
+      <section
         class="header__presentation presentation"
         aria-label="Presentation Enterprise"
       >
@@ -35,15 +35,50 @@
         <h1 class="presentation__title" aria-label="Enterprise Name">
           Les petits plats
         </h1>
-      </div>
-      <input
-        type="search"
-        placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-      />
-      <input type="search" placeholder="Ingredients" id="ingredients" />
-      <button><i class="fas fa-chevron-down"></i></button>
-      <input type="search" placeholder="Appareil " id="device" />
-      <input type="search" placeholder="Ustensiles" id="utensils" />
+      </section>
+
+      <section class="input">
+        <div class="input__main main">
+          <input
+            type="search"
+            placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+            class="main__search"
+          />
+          <span class="fas fa-search main__icon"></span>
+        </div>
+
+        <div class="input__ingredients secondary">
+          <input
+            type="search"
+            placeholder="Ingredients"
+            id="ingredients"
+            class="secondary__search"
+          />
+          <button>
+            <span class="fas fa-chevron-down secondary__icon"></span>
+          </button>
+        </div>
+
+        <div class="input__devices secondary">
+          <input type="search" placeholder="Appareil " id="device"
+          class="secondary__search/>
+          <button>
+            <span class="fas fa-chevron-down secondary__icon"></span>
+          </button>
+        </div>
+
+        <div class="input__ustensils secondary">
+          <input
+            type="search"
+            placeholder="Ustensiles"
+            id="utensils"
+            class="secondary__search"
+          />
+          <button>
+            <span class="fas fa-chevron-down secondary__icon"></span>
+          </button>
+        </div>
+      </section>
     </header>
     <main>
       <section id="recipes" class="recipes"></section>
