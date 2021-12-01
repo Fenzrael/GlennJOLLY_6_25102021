@@ -2,7 +2,9 @@
 
 const params = new URLSearchParams(document.location.search.substring(1));
 const main = document.getElementById("main");
+
 const recipes = document.getElementById("recipes");
+const userMainSearch = document.querySelector(".main__search");
 
 //Import all Datas of recipes.json
 const recipesArray = [];
@@ -33,12 +35,16 @@ function constructMediaHtml() {
       recipes.innerHTML += `
             <article class="recipes__card card">
                 <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
-                <h2 class="card__title">${recipe.name}</h2>
-                <span class="far fa-clock card__time">${recipe.time}</span>
+                <h2 class="card__title">${
+                  recipe.name
+                }<span class="far fa-clock card__time"> ${
+        recipe.time
+      } min</span></h2>
+                
                 <aside class="card__ingredients">${ingredientsConstructHtml(
                   recipe.ingredients
                 )}</aside>
-                <aside class=""card__description>${recipe.description}</aside>
+                <aside class="card__description">${recipe.description}</aside>
             </article>
       `;
     });
@@ -48,14 +54,13 @@ constructMediaHtml();
 
 const ingredientsConstructHtml = function (ingredients) {
   return ingredients.map((currentIngredient) => {
-    return `<ul class="list">
-              <li class="list__ingredient">${
+    return `<ul class="ingredientsElt">
+              <li class="ingredientsElt__ingredient">${
                 currentIngredient.ingredient ?? ""
-              }</li>
-              <li class="list__quantity">${
-                currentIngredient.quantity ?? ""
-              }</li>
-              <li class="list__unit">${currentIngredient.unit ?? ""}</li>
+              } : ${currentIngredient.quantity ?? ""} ${
+      currentIngredient.unit ?? ""
+    }
+              </li>
             </ul>
     `;
   });
