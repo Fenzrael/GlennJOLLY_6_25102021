@@ -1,9 +1,10 @@
 "use strict";
 
 const params = new URLSearchParams(document.location.search.substring(1));
+const main = document.getElementById("main");
+
 const recipes = document.getElementById("recipes");
 const userMainSearch = document.querySelector(".main__search");
-console.log(userMainSearch);
 
 //Import all Datas of recipes.json
 const recipesArray = [];
@@ -34,12 +35,16 @@ function constructMediaHtml() {
       recipes.innerHTML += `
             <article class="recipes__card card">
                 <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
-                <h2 class="card__title">${recipe.name}</h2>
-                <span class="far fa-clock card__time">${recipe.time}</span>
+                <h2 class="card__title">${
+                  recipe.name
+                }<span class="far fa-clock card__time"> ${
+        recipe.time
+      } min</span></h2>
+                
                 <aside class="card__ingredients">${ingredientsConstructHtml(
                   recipe.ingredients
                 )}</aside>
-                <aside class=""card__description>${recipe.description}</aside>
+                <aside class="card__description">${recipe.description}</aside>
             </article>
       `;
     });
@@ -49,10 +54,13 @@ constructMediaHtml();
 
 const ingredientsConstructHtml = function (ingredients) {
   return ingredients.map((currentIngredient) => {
-    return `<ul class="">
-              <li>${currentIngredient.ingredient ?? ""}</li>
-              <li>${currentIngredient.quantity ?? ""}</li>
-              <li>${currentIngredient.unit ?? ""}</li>
+    return `<ul class="ingredientsElt">
+              <li class="ingredientsElt__ingredient">${
+                currentIngredient.ingredient ?? ""
+              } : ${currentIngredient.quantity ?? ""} ${
+      currentIngredient.unit ?? ""
+    }
+              </li>
             </ul>
     `;
   });
@@ -75,15 +83,16 @@ let ustensilsElts = [];
 let ingredientsElts = [];
 
 // 2. Creer boucle for et pour chaque iterations localiser element taper par l'utilisateur et l'isoler
-const isolateDatas = function () {
+
+// 3. Supprimer Doublons
+
+// 4. Rendre recettes avec les données recherchées
+/* const isolateDatas = function () {
   userMainSearch.addEventListener("keydown", (e) => {
     if (e.value.length > 3) {
     }
   });
 };
-isolateDatas();
-// 3. Supprimer Doublons
-
-// 4. Rendre recettes avec les données recherchées
+isolateDatas(); */
 
 // 5. Supprimer données tapées dans les barres de recherches apres affichage des recettes
