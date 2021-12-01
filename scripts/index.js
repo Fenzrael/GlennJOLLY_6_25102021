@@ -2,6 +2,8 @@
 
 const params = new URLSearchParams(document.location.search.substring(1));
 const recipes = document.getElementById("recipes");
+const userMainSearch = document.querySelector(".main__search");
+console.log(userMainSearch);
 
 //Import all Datas of recipes.json
 const recipesArray = [];
@@ -61,10 +63,25 @@ const ingredientsConstructHtml = function (ingredients) {
 // Decoupe Probleme: Afficher recettes par ingredients, appareils, ustensiles ou nom de recette dans barre de recherche ou description
 
 // 1. Creer Arrays pour chaque categorie de recherche
+// 1.1. Arrays pour recherche principale
+let titlesElts = [];
+let descriptionElts = [];
+
+// 1.2. Arrays pour recherche secondaire
+let devicesElts = [];
+let ustensilsElts = [];
+
+// 1.3. Array pour les deux recherches
+let ingredientsElts = [];
 
 // 2. Creer boucle for et pour chaque iterations localiser element taper par l'utilisateur et l'isoler
-// 2.1.
-
+const isolateDatas = function () {
+  userMainSearch.addEventListener("keydown", (e) => {
+    if (e.value.length > 3) {
+    }
+  });
+};
+isolateDatas();
 // 3. Supprimer Doublons
 
 // 4. Rendre recettes avec les données recherchées
