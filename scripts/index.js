@@ -1,6 +1,7 @@
 "use strict";
 
 const params = new URLSearchParams(document.location.search.substring(1));
+const main = document.getElementById("main");
 const recipes = document.getElementById("recipes");
 
 //Import all Datas of recipes.json
