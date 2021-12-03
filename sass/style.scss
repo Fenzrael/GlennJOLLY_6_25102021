@@ -1,6 +1,11 @@
 @font-face {
   font-family: "Lato";
-  src: url("./assets/fonts/");
+  src: url("./assets/fonts/lato/latoRegular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/roboto/robotoRegular.ttf") format("ttf");
 }
 
 * {
@@ -8,7 +13,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 body {
@@ -130,10 +135,11 @@ body {
     overflow: hidden;
   }
   &__description {
+    font-family: "Roboto", sans-serif;
     float: right;
     margin: 1.5rem 0.5rem 0.1rem 0;
     max-width: 45%;
-    height: 109px;
+    height: 115px;
     font-size: 12px;
     overflow: hidden;
     text-align: justify;
