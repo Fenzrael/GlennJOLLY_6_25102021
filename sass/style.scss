@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/");
+}
+
 * {
   list-style-type: none;
   box-sizing: border-box;
@@ -114,34 +119,108 @@ body {
   border-radius: 5px;
   overflow: hidden;
   width: 30%;
-  min-height: 41rem;
+  height: 364px;
   margin-bottom: 1rem;
+  text-overflow: ellipsis;
   &__image {
     width: 100%;
     height: auto;
-    object-fit: contain;
+    max-height: 180px;
+    object-fit: cover;
     overflow: hidden;
   }
   &__description {
     float: right;
-    margin-top: 2rem;
+    margin: 1.5rem 0.5rem 0.1rem 0;
+    max-width: 45%;
+    height: 109px;
+    font-size: 12px;
+    overflow: hidden;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+  }
+  &__title {
+    margin-left: 0.5rem;
+    font-size: 15px;
+  }
+  &__time {
+    font-weight: bold;
+    margin-top: 0.1rem;
+    margin-right: 0.5rem;
+    float: right;
+    font-size: 15px;
+    &::before {
+      font-weight: bold;
+    }
+    &::after {
+      font-weight: bold;
+    }
+  }
+  &__ingredients {
+    float: left;
+    margin-top: 1.5rem;
     margin-left: 0.5rem;
     width: 45%;
     font-size: 12px;
   }
-  &__title {
-    margin-left: 0.5rem;
-    font-size: 18px;
+}
+
+@media only screen and (max-width: 769px) {
+  .card {
+    width: 48%;
+    &__title {
+      font-size: 13px;
+    }
+    &__time {
+      font-size: 13px;
+    }
   }
-  &__time {
-    font-weight: bold;
-    margin-right: 0.5rem;
-    float: right;
+}
+
+@media only screen and (max-width: 580px) {
+  .card {
+    width: 100%;
   }
-  &__ingredients {
-    float: left;
-    margin-top: 2rem;
-    margin-left: 0.5rem;
-    width: 40%;
+
+  .secondary {
+    width: 25%;
+  }
+
+  .main {
+    &__search {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .input {
+    display: block;
+  }
+
+  .main {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .secondary {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .recipes {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .card {
+    min-height: auto;
+    &__description {
+      width: 54%;
+    }
   }
 }

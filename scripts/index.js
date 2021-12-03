@@ -3,7 +3,7 @@
 const params = new URLSearchParams(document.location.search.substring(1));
 const main = document.getElementById("main");
 
-const recipes = document.getElementById("recipes");
+const recipesHTML = document.getElementById("recipes");
 const userMainSearch = document.querySelector(".main__search");
 
 //Import all Datas of recipes.json
@@ -29,21 +29,26 @@ const recipesDisplay = async () => {
 };
 
 function constructMediaHtml() {
-  recipes.innerHTML = "";
+  recipesHTML.innerHTML = "";
   recipesDisplay().then(() => {
     recipesArray.forEach((recipe) => {
-      recipes.innerHTML += `
+      recipesHTML.innerHTML += `
             <article class="recipes__card card">
-                <img class="card__image" src="./assets/Img/cook.jpg" alt="image"/>
+                <img class="card__image" src="./assets/img/imgRecipes/${
+                  recipe.image
+                }" alt="image"/>
                 <h2 class="card__title">${
                   recipe.name
                 }<span class="far fa-clock card__time"> ${
         recipe.time
       } min</span></h2>
                 
-                <aside class="card__ingredients">${ingredientsConstructHtml(
-                  recipe.ingredients
-                )}</aside>
+                <aside class="card__ingredients">
+                  <ul class="ing">${ingredientsConstructHtml(
+                    recipe.ingredients
+                  )}
+                  </ul>
+                  </aside>
                 <aside class="card__description">${recipe.description}</aside>
             </article>
       `;
@@ -54,14 +59,14 @@ constructMediaHtml();
 
 const ingredientsConstructHtml = function (ingredients) {
   return ingredients.map((currentIngredient) => {
-    return `<ul class="ingredientsElt">
-              <li class="ingredientsElt__ingredient">${
-                currentIngredient.ingredient ?? ""
-              } : ${currentIngredient.quantity ?? ""} ${
-      currentIngredient.unit ?? ""
+    if (currentIngredient.quantity == undefined) {
+      return `<li class="ing__ingredient">${currentIngredient.ingredient} </li>`;
+    } else if (currentIngredient.unit == undefined) {
+      return `<li class="ing__ingredient">${currentIngredient.ingredient} : ${currentIngredient.quantity}</li>`;
+    } else {
+      return `<li class="ing__ingredient">${currentIngredient.ingredient} : ${currentIngredient.quantity}${currentIngredient.unit}`;
     }
-              </li>
-            </ul>
-    `;
   });
 };
+
+// Algorithme de recherche 1 (boucle for):
