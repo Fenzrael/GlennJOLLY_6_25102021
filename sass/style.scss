@@ -1,11 +1,8 @@
 @font-face {
-  font-family: "Lato";
-  src: url("./assets/fonts/lato/latoRegular.ttf") format("ttf");
-}
-
-@font-face {
   font-family: "Roboto";
   src: url("./assets/fonts/roboto/robotoRegular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
@@ -29,6 +26,7 @@ body {
     width: 50px;
   }
   &__title {
+    font-family: "DM Sans", sans-serif;
     color: #d04f4f;
   }
 }
