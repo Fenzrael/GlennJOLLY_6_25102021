@@ -78,9 +78,13 @@ body {
   }
   &__icon {
     position: absolute;
-    top: 6.8rem;
+    top: 7rem;
     right: 3rem;
     z-index: 1;
+  }
+  &__tags {
+    width: 100%;
+    border-radius: 5px;
   }
 }
 
@@ -225,6 +229,14 @@ body {
     min-height: auto;
     &__description {
       width: 54%;
+    }
+  }
+}
+
+@media only screen and (max-width: 321px) {
+  .main {
+    &__icon {
+      right: 1.5rem;
     }
   }
 }

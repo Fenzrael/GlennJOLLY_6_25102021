@@ -9,7 +9,9 @@ const userMainSearch = document.querySelector(".main__search");
 //Import all Datas of recipes.json
 const recipesArray = [];
 console.log(recipesArray);
+//Temporary Variable
 let recipesData = [];
+let datasLowerCase;
 
 //Import data of recipes.json
 
@@ -26,36 +28,42 @@ const recipesDisplay = async () => {
   recipesData.recipes.forEach((recipe) => {
     recipesArray.push(recipe);
   });
+  retrieveDatas(recipesArray);
 };
 
+// Index Creation
+const indexCreation = function () {
+  constructMediaHtml();
+};
+
+// Creation Card Recipes
 function constructMediaHtml() {
   recipesHTML.innerHTML = "";
   recipesDisplay().then(() => {
     recipesArray.forEach((recipe) => {
-      recipesHTML.innerHTML += `
-            <article class="recipes__card card">
-                <img class="card__image" src="./assets/img/imgRecipes/${
-                  recipe.image
-                }" alt="image"/>
-                <h2 class="card__title">${
-                  recipe.name
-                }<span class="far fa-clock card__time"> ${
-        recipe.time
-      } min</span></h2>
-                
-                <aside class="card__ingredients">
-                  <ul class="ing">${ingredientsConstructHtml(
-                    recipe.ingredients
-                  )}
-                  </ul>
-                  </aside>
-                <aside class="card__description">${recipe.description}</aside>
-            </article>
-      `;
+      recipesHTML.innerHTML += constructArticleHTML(recipe);
     });
   });
 }
-constructMediaHtml();
+
+// function creation Article(Recipe Card)
+function constructArticleHTML(recipe) {
+  return `<article class="recipes__card card">
+  <img class="card__image" src="./assets/img/imgRecipes/${
+    recipe.image
+  }" alt="image"/>
+  <h2 class="card__title">${
+    recipe.name
+  }<span class="far fa-clock card__time"> ${recipe.time} min</span></h2>
+  
+  <aside class="card__ingredients">
+    <ul class="ing">${ingredientsConstructHtml(recipe.ingredients)} 
+    </ul>
+    </aside>
+  <aside class="card__description">${recipe.description}</aside>
+</article>
+`;
+}
 
 const ingredientsConstructHtml = function (ingredients) {
   return ingredients.map((currentIngredient) => {
@@ -69,6 +77,22 @@ const ingredientsConstructHtml = function (ingredients) {
   });
 };
 
+// Function change placeholder when window size 426px
+function changePlaceholderInputMainSearch() {
+  if ("matchMedia in window") {
+    if (window.matchMedia("(min-width: 426px)").matches) {
+      userMainSearch.setAttribute(
+        "placeholder",
+        "Rechercher un ingrédient, appareil, ustensiles ou une recette"
+      );
+    } else {
+      userMainSearch.setAttribute("placeholder", "Rechercher");
+    }
+  }
+}
+
+window.addEventListener("resize", changePlaceholderInputMainSearch);
+
 //++++++++++++++++++++++++++++++++++++++++++
 // Algorithme de recherche 1 (boucle for):++
 //++++++++++++++++++++++++++++++++++++++++++
@@ -76,6 +100,95 @@ const ingredientsConstructHtml = function (ingredients) {
 //+++++++++++++++++++++++
 // Recherche principale++
 //+++++++++++++++++++++++
+
+// Creation Variables storage: (titles, ingredients, descriptions) of recipes
+
+let titlesArray = [];
+let ingredientsArray = [];
+let descriptionsArray = [];
+
+// Filling Variables storage
+function retrieveDatas(element) {
+  for (let i = 0; i < element.length; i++) {
+    titlesArray.push(element[i].name.toLowerCase());
+    element[i].ingredients.forEach((ingredient) =>
+      ingredientsArray.push(ingredient.ingredient.toLowerCase())
+    );
+    descriptionsArray.push(element[i].description.toLowerCase());
+  }
+  datasLowerCase = titlesArray.concat(ingredientsArray, descriptionsArray);
+  return true;
+}
+console.log(titlesArray, ingredientsArray, descriptionsArray);
+
+// Creation Variables storage type by user in Search input
+
+let datasTypeByUser = [];
+let datasComparison = [];
+
+userMainSearch.addEventListener("input", compareDataAndDataTypeByUser);
+
+function compareDataAndDataTypeByUser(event) {
+  const value = event.target.value.toLowerCase(); // valeur type by User in lower case(toLowerCase)
+
+  if (value.length >= 3) {
+    recipesHTML.innerHTML = "";
+    for (let i = 0; i < recipesArray.length; i++) {
+      const recipe = recipesArray[i];
+      const includeInName = recipe.name.toLowerCase().includes(value); // includes (methode native Js verifiant si c'est inclut)
+      const includeInDescription = recipe.description
+        .toLowerCase()
+        .includes(value);
+      let includeInIngredient = false; // initialize at false(0 ingredient)
+      for (let i = 0; i < recipe.ingredients.length; i++) {
+        const currentIngredientName =
+          recipe.ingredients[i].ingredient.toLowerCase();
+        if (currentIngredientName.includes(value)) {
+          includeInIngredient = true; // if
+          break;
+        }
+      }
+
+      if (includeInName || includeInIngredient || includeInDescription) {
+        recipesHTML.innerHTML += constructArticleHTML(recipe);
+      }
+      // if (datasLowerCase[i].includes(event.target.value.toLowerCase())) {
+      //   datasTypeByUser.push(datasLowerCase[i]);
+      //   recipesHTML.innerHTML += constructMediaHtml(datasTypeByUser);
+      // }
+    }
+  } /* else if(value.length === 0 || value = ""){
+      let div = document.createElement
+    
+  } */
+
+  // for (let i = 0; i < datasLowerCase.length; i++) {
+  //   datasTypeByUser.forEach((element) => {
+  //     datasLowerCase[i].ingredients.forEach((ingredient) => {
+  //       if (ingredient.ingredient.toLowerCase().includes(element)) {
+  //         datasComparison.push(datasLowerCase[i]);
+  //       }
+  //     });
+  //     if (datasLowerCase[i].name.toLowerCase().includes(element)) {
+  //       datasComparison.push(datasLowerCase[i]);
+  //     } else if (
+  //       datasLowerCase[i].description.toLowerCase().includes(element)
+  //     ) {
+  //       datasComparison.push(datasLowerCase[i]);
+  //     }
+  //   });
+  // }
+}
+
+// constructMediaHtml(datasComparison);
+
+//+++++++++++++++++++++++
+// Recherche secondaire++
+//+++++++++++++++++++++++
+
+//+++++++++++++++
+// Instructions++
+//+++++++++++++++
 
 // Recherche par mots ou groupe de lettres dans le titre, les ingredients ou la description.
 
@@ -154,6 +267,4 @@ const ingredientsConstructHtml = function (ingredients) {
 
 // 8. Aucune librairie ne sera utilisée pour le JavaScript du moteur de recherche.
 
-//+++++++++++++++++++++++
-// Recherche secondaire++
-//+++++++++++++++++++++++
+indexCreation();
