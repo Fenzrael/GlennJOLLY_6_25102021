@@ -1,11 +1,17 @@
 "use strict";
-
+// Global Variables
 const params = new URLSearchParams(document.location.search.substring(1));
 const main = document.getElementById("main");
-
+const mainTags = document.querySelector(".main__tags");
 const recipesHTML = document.getElementById("recipes");
-const userMainSearch = document.querySelector(".main__search");
 
+// Variables catch input
+const userMainSearch = document.querySelector(".main__search");
+const ingredientsSearch = document.getElementById("ingredients");
+const devicesSearch = document.getElementById("devices");
+const ustensilsSearch = document.getElementById("ustensils");
+
+console.log(mainTags, ingredientsSearch, devicesSearch, ustensilsSearch);
 //Import all Datas of recipes.json
 const recipesArray = [];
 console.log(recipesArray);
@@ -29,11 +35,7 @@ const recipesDisplay = async () => {
     recipesArray.push(recipe);
   });
   retrieveDatas(recipesArray);
-};
-
-// Index Creation
-const indexCreation = function () {
-  constructMediaHtml();
+  retrieveFilters(recipesArray);
 };
 
 // Creation Card Recipes
@@ -45,8 +47,9 @@ function constructMediaHtml() {
     });
   });
 }
-
-// function creation Article(Recipe Card)
+constructMediaHtml();
+// function creation Article(Recipe Card) create because forEach constructMediaHtml
+// do bug loop "for" for search main
 function constructArticleHTML(recipe) {
   return `<article class="recipes__card card">
   <img class="card__image" src="./assets/img/imgRecipes/${
@@ -54,7 +57,9 @@ function constructArticleHTML(recipe) {
   }" alt="image"/>
   <h2 class="card__title">${
     recipe.name
-  }<span class="far fa-clock card__time"> ${recipe.time} min</span></h2>
+  }<span class="far fa-clock card__time"> <strong class="boldText">${
+    recipe.time
+  } min</strong></span></h2>
   
   <aside class="card__ingredients">
     <ul class="ing">${ingredientsConstructHtml(recipe.ingredients)} 
@@ -65,16 +70,19 @@ function constructArticleHTML(recipe) {
 `;
 }
 
+// Map ingredients
 const ingredientsConstructHtml = function (ingredients) {
-  return ingredients.map((currentIngredient) => {
-    if (currentIngredient.quantity == undefined) {
-      return `<li class="ing__ingredient">${currentIngredient.ingredient} </li>`;
-    } else if (currentIngredient.unit == undefined) {
-      return `<li class="ing__ingredient">${currentIngredient.ingredient} : ${currentIngredient.quantity}</li>`;
-    } else {
-      return `<li class="ing__ingredient">${currentIngredient.ingredient} : ${currentIngredient.quantity}${currentIngredient.unit}`;
-    }
-  });
+  return ingredients
+    .map((currentIngredient) => {
+      if (currentIngredient.quantity == undefined) {
+        return `<li class="ing__ingredient">${currentIngredient.ingredient} </li>`;
+      } else if (currentIngredient.unit == undefined) {
+        return `<li class="ing__ingredient">${currentIngredient.ingredient} : <strong>${currentIngredient.quantity}</strong></li>`;
+      } else {
+        return `<li class="ing__ingredient">${currentIngredient.ingredient} : <strong>${currentIngredient.quantity} ${currentIngredient.unit}.</strong></li>`;
+      }
+    })
+    .join(""); // .join("") enleve les virgules parasites de l'objet
 };
 
 // Function change placeholder when window size 426px
@@ -123,12 +131,12 @@ console.log(titlesArray, ingredientsArray, descriptionsArray);
 
 // Creation Variables storage type by user in Search input
 
-let datasTypeByUser = [];
-let datasComparison = [];
+// let datasTypeByUser = [];
+// let datasComparison = [];
 
-userMainSearch.addEventListener("input", compareDataAndDataTypeByUser);
+userMainSearch.addEventListener("input", compareDatasMainSearch);
 
-function compareDataAndDataTypeByUser(event) {
+function compareDatasMainSearch(event) {
   const value = event.target.value.toLowerCase(); // valeur type by User in lower case(toLowerCase)
 
   if (value.length >= 3) {
@@ -139,12 +147,15 @@ function compareDataAndDataTypeByUser(event) {
       const includeInDescription = recipe.description
         .toLowerCase()
         .includes(value);
-      let includeInIngredient = false; // initialize at false(0 ingredient)
+
+      // initialize at false(0 ingredient)
+      let includeInIngredient = false;
+
       for (let i = 0; i < recipe.ingredients.length; i++) {
         const currentIngredientName =
           recipe.ingredients[i].ingredient.toLowerCase();
         if (currentIngredientName.includes(value)) {
-          includeInIngredient = true; // if
+          includeInIngredient = true; // if true ingredient type by user include
           break;
         }
       }
@@ -152,40 +163,59 @@ function compareDataAndDataTypeByUser(event) {
       if (includeInName || includeInIngredient || includeInDescription) {
         recipesHTML.innerHTML += constructArticleHTML(recipe);
       }
+
       // if (datasLowerCase[i].includes(event.target.value.toLowerCase())) {
       //   datasTypeByUser.push(datasLowerCase[i]);
       //   recipesHTML.innerHTML += constructMediaHtml(datasTypeByUser);
       // }
     }
-  } /* else if(value.length === 0 || value = ""){
-      let div = document.createElement
-    
-  } */
-
-  // for (let i = 0; i < datasLowerCase.length; i++) {
-  //   datasTypeByUser.forEach((element) => {
-  //     datasLowerCase[i].ingredients.forEach((ingredient) => {
-  //       if (ingredient.ingredient.toLowerCase().includes(element)) {
-  //         datasComparison.push(datasLowerCase[i]);
-  //       }
-  //     });
-  //     if (datasLowerCase[i].name.toLowerCase().includes(element)) {
-  //       datasComparison.push(datasLowerCase[i]);
-  //     } else if (
-  //       datasLowerCase[i].description.toLowerCase().includes(element)
-  //     ) {
-  //       datasComparison.push(datasLowerCase[i]);
-  //     }
-  //   });
-  // }
+    // for (let i = 0; i < datasLowerCase.length; i++) {
+    //   datasTypeByUser.forEach((element) => {
+    //     datasLowerCase[i].ingredients.forEach((ingredient) => {
+    //       if (ingredient.ingredient.toLowerCase().includes(element)) {
+    //         datasComparison.push(datasLowerCase[i]);
+    //       }
+    //     });
+    //     if (datasLowerCase[i].name.toLowerCase().includes(element)) {
+    //       datasComparison.push(datasLowerCase[i]);
+    //     } else if (
+    //       datasLowerCase[i].description.toLowerCase().includes(element)
+    //     ) {
+    //       datasComparison.push(datasLowerCase[i]);
+    //     }
+    //   });
+    // }
+  }
 }
-
 // constructMediaHtml(datasComparison);
 
 //+++++++++++++++++++++++
 // Recherche secondaire++
 //+++++++++++++++++++++++
 
+let filterIngredients = [];
+let filterDevices = [];
+let filterUstensils = [];
+
+let uniqueFilterDevices = [...new Set(filterDevices)];
+
+function retrieveFilters(element) {
+  for (let i = 0; i < element.length; i++) {
+    filterDevices.push(element[i].appliance);
+  }
+  return true;
+}
+
+console.log(filterDevices);
+console.log(uniqueFilterDevices);
+
+/* function compareDatasSecondarySearch(event) {
+  const value = event.target.value.toLowerCase();
+
+  if (value.length >= 3) {
+    recipesHTML.innerHTML = "";
+  }
+} */
 //+++++++++++++++
 // Instructions++
 //+++++++++++++++
@@ -266,5 +296,3 @@ function compareDataAndDataTypeByUser(event) {
 // 7. Comme pour le reste du site, le code HTML et CSS pour l’interface (avec ou sans Bootstrap) devra passer avec succès le validateur W3C.
 
 // 8. Aucune librairie ne sera utilisée pour le JavaScript du moteur de recherche.
-
-indexCreation();
