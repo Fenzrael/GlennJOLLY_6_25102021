@@ -78,9 +78,13 @@ body {
   }
   &__icon {
     position: absolute;
-    top: 6.8rem;
+    top: 7rem;
     right: 3rem;
     z-index: 1;
+  }
+  &__tags {
+    width: 100%;
+    border-radius: 5px;
   }
 }
 
@@ -150,17 +154,10 @@ body {
     font-size: 15px;
   }
   &__time {
-    font-weight: bold;
     margin-top: 0.1rem;
     margin-right: 0.5rem;
     float: right;
     font-size: 15px;
-    &::before {
-      font-weight: bold;
-    }
-    &::after {
-      font-weight: bold;
-    }
   }
   &__ingredients {
     float: left;
@@ -169,6 +166,10 @@ body {
     width: 45%;
     font-size: 12px;
   }
+}
+
+.boldText {
+  font-weight: 900;
 }
 
 @media only screen and (max-width: 769px) {
@@ -225,6 +226,14 @@ body {
     min-height: auto;
     &__description {
       width: 54%;
+    }
+  }
+}
+
+@media only screen and (max-width: 321px) {
+  .main {
+    &__icon {
+      right: 1.5rem;
     }
   }
 }
