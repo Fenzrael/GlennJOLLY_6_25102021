@@ -5,6 +5,12 @@
   font-style: normal;
 }
 
+@mixin tags {
+  width: 110px;
+  border-radius: 5px;
+  color: white;
+}
+
 * {
   list-style-type: none;
   box-sizing: border-box;
@@ -170,6 +176,24 @@ body {
 
 .boldText {
   font-weight: 900;
+}
+
+.tags {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  &__ingredients {
+    @include tags;
+    background-color: #3282f7;
+  }
+  &__devices {
+    @include tags;
+    background-color: #68d9a4;
+  }
+  &__ustensils {
+    @include tags;
+    background-color: #ed6454;
+  }
 }
 
 @media only screen and (max-width: 769px) {

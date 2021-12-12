@@ -127,7 +127,7 @@ function retrieveDatas(element) {
   datasLowerCase = titlesArray.concat(ingredientsArray, descriptionsArray);
   return true;
 }
-console.log(titlesArray, ingredientsArray, descriptionsArray);
+// console.log(titlesArray, ingredientsArray, descriptionsArray);
 
 // Creation Variables storage type by user in Search input
 
@@ -193,21 +193,33 @@ function compareDatasMainSearch(event) {
 // Recherche secondaire++
 //+++++++++++++++++++++++
 
-let filterIngredients = [];
+// Variables Storage temporary elements for filter tags
 let filterDevices = [];
 let filterUstensils = [];
+let filterIngredients = [];
 
-let uniqueFilterDevices = [...new Set(filterDevices)];
+let uniqueFilterDevices = [];
+let uniqueFilterUstensils = [];
+let uniqueFilterIngredients = [];
+let separateUstensils = [];
 
 function retrieveFilters(element) {
   for (let i = 0; i < element.length; i++) {
     filterDevices.push(element[i].appliance);
+    filterUstensils.push(element[i].ustensils);
+    element[i].ingredients.forEach((ingredient) =>
+      filterIngredients.push(ingredient.ingredient)
+    );
   }
-  return true;
-}
 
-console.log(filterDevices);
+  uniqueFilterDevices = new Set([...filterDevices]);
+  uniqueFilterUstensils = new Set([...filterUstensils]);
+  uniqueFilterIngredients = new Set([...filterIngredients]);
+  return uniqueFilterDevices;
+}
+console.log(filterDevices, filterUstensils, filterIngredients);
 console.log(uniqueFilterDevices);
+// Variables without duplicates elements
 
 /* function compareDatasSecondarySearch(event) {
   const value = event.target.value.toLowerCase();
