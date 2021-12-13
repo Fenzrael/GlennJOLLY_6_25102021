@@ -10,6 +10,7 @@ const userMainSearch = document.querySelector(".main__search");
 const ingredientsSearch = document.getElementById("ingredients");
 const devicesSearch = document.getElementById("devices");
 const ustensilsSearch = document.getElementById("ustensils");
+const secondaryTags = document.querySelector(".secondary__tags");
 
 console.log(mainTags, ingredientsSearch, devicesSearch, ustensilsSearch);
 //Import all Datas of recipes.json
@@ -169,22 +170,6 @@ function compareDatasMainSearch(event) {
       //   recipesHTML.innerHTML += constructMediaHtml(datasTypeByUser);
       // }
     }
-    // for (let i = 0; i < datasLowerCase.length; i++) {
-    //   datasTypeByUser.forEach((element) => {
-    //     datasLowerCase[i].ingredients.forEach((ingredient) => {
-    //       if (ingredient.ingredient.toLowerCase().includes(element)) {
-    //         datasComparison.push(datasLowerCase[i]);
-    //       }
-    //     });
-    //     if (datasLowerCase[i].name.toLowerCase().includes(element)) {
-    //       datasComparison.push(datasLowerCase[i]);
-    //     } else if (
-    //       datasLowerCase[i].description.toLowerCase().includes(element)
-    //     ) {
-    //       datasComparison.push(datasLowerCase[i]);
-    //     }
-    //   });
-    // }
   }
 }
 // constructMediaHtml(datasComparison);
@@ -198,7 +183,7 @@ let filterDevices = [];
 let filterUstensils = [];
 let filterIngredients = [];
 
-let uniqueFilterDevices = [];
+let uniqueFilterDevices;
 let uniqueFilterUstensils = [];
 let uniqueFilterIngredients = [];
 let separateUstensils = [];
@@ -212,22 +197,48 @@ function retrieveFilters(element) {
     );
   }
 
+  for (let i = 0; i < filterUstensils.length; i++) {
+    separateUstensils = separateUstensils.concat(filterUstensils[i]);
+
+    separateUstensils.filter(function (ele, pos) {
+      return separateUstensils.indexOf(ele) == pos;
+    });
+  }
+  console.log(separateUstensils);
+
+  // Variables without duplicates elements
   uniqueFilterDevices = new Set([...filterDevices]);
-  uniqueFilterUstensils = new Set([...filterUstensils]);
+  uniqueFilterUstensils = new Set([...separateUstensils]);
   uniqueFilterIngredients = new Set([...filterIngredients]);
-  return uniqueFilterDevices;
+
+  console.log(
+    uniqueFilterDevices,
+    uniqueFilterIngredients,
+    uniqueFilterUstensils
+  );
 }
 console.log(filterDevices, filterUstensils, filterIngredients);
-console.log(uniqueFilterDevices);
-// Variables without duplicates elements
 
-/* function compareDatasSecondarySearch(event) {
-  const value = event.target.value.toLowerCase();
-
-  if (value.length >= 3) {
-    recipesHTML.innerHTML = "";
-  }
+/* function creationHtmlTags(element) {
+  mainTags.innerHTML += `
+                      <div class="tags__${element}"><span class="far fa-times-circle"></span></div>
+  `;
 } */
+
+function incorporateTagsSecondarySearch() {
+  ingredientsSearch.innerHTML += `
+                              <ul class="secondary__tags tag">
+                                
+                              </ul>
+  `;
+}
+
+function liTags() {
+  for
+  secondaryTags.innerHTML += `
+                          <li class=""></li>
+  `;
+}
 //+++++++++++++++
 // Instructions++
 //+++++++++++++++
