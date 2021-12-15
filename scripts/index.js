@@ -214,7 +214,7 @@ function retrieveFilters(element) {
 }
 console.log(filterDevices, filterUstensils, filterIngredients);
 
-function creationHtmlTagsContainer() {
+/* function creationHtmlTagsContainer() {
   mainTags.innerHTML += `
                       <div class="tags__ingredients">${incorporateTagsSecondarySearch()}</div>
                       <div class="tags__devices"></div>
@@ -240,7 +240,7 @@ function liTags(element) {
                             <li class="tag__ingredient">${element[i]}</li>
     `;
   }
-}
+} */
 
 //+++++++++++++++
 // Instructions++
