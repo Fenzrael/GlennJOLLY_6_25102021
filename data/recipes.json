@@ -58,11 +58,11 @@
           "quantite": 1
         },
         {
-          "ingredient": "Citron Vert",
+          "ingredient": "Citron vert",
           "quantity": 5
         },
         {
-          "ingredient": "Lait de Coco",
+          "ingredient": "Lait de coco",
           "quantity": 100,
           "unit": "ml"
         }
@@ -88,7 +88,7 @@
           "unit": "ml"
         },
         {
-          "ingredient": "Coulis de tomate",
+          "ingredient": "Coulis de tomates",
           "quantity": 25,
           "unit": "cl"
         },
@@ -101,11 +101,11 @@
           "quantity": 1
         },
         {
-          "ingredient": "Huile d'olive"
+          "ingredient": "Huile d'olives"
         }
       ],
       "time": 80,
-      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomate, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz.",
+      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olives. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomates, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz.",
       "appliance": "Cocotte",
       "ustensils": ["Couteau"]
     },
@@ -169,12 +169,12 @@
           "quantity": 2
         },
         {
-          "ingredient": "Crème fraiche",
+          "ingredient": "Crème fraîche",
           "quantity": 2,
           "unit": "cuillères à soupe"
         },
         {
-          "ingredient": "gruyère râpé",
+          "ingredient": "Gruyère râpé",
           "quantity": 100,
           "unit": "g"
         },
@@ -185,7 +185,7 @@
         }
       ],
       "time": 45,
-      "description": "Etaler la pâte feuilleté aux dimensions du moule, étaler la moutarde sur la pâte feuilleté, ajouter le thon. Découper les tomates en rondelles et les poser sur le poisson, ajouter un peu de crème fraiche sur toute la tarte et recouvrez de gruyère râpé. Cuire au four 30 minutes.",
+      "description": "Etaler la pâte feuilleté aux dimensions du moule, étaler la moutarde sur la pâte feuilleté, ajouter le thon. Découper les tomates en rondelles et les poser sur le poisson, ajouter un peu de crème fraîche sur toute la tarte et recouvrez de gruyère râpé. Cuire au four 30 minutes.",
       "appliance": "Four",
       "ustensils": ["Moule à tarte", "Râpe à fromage", "Couteau"]
     },
@@ -208,12 +208,12 @@
           "quantity": "2"
         },
         {
-          "ingredient": "Crème fraiche",
+          "ingredient": "Crème fraîche",
           "quantity": 25,
           "unit": "cl"
         },
         {
-          "ingredient": "Sucre en Poudre",
+          "ingredient": "Sucre en poudre",
           "quantity": 100,
           "unit": "g"
         },
@@ -224,7 +224,7 @@
         }
       ],
       "time": 50,
-      "description": "Commencez par mélanger les oeufs le sucre et le sucre vanillé dans un saladier, découper les pommes en tranches, ajouter la crème fraiche aux oeufs. Une fois que tout est pret, étalez la tarte dans le moule. N'oubliez pas de piquer le fond avec une fourchette avant de positionner les pommes sur la tarte. Finallement verser la préparation à base d'oeufs et de crême fraiche. Laisser cuire au four pendant 30 minutes.",
+      "description": "Commencez par mélanger les oeufs le sucre et le sucre vanillé dans un saladier, découper les pommes en tranches, ajouter la crème fraîche aux oeufs. Une fois que tout est pret, étalez la tarte dans le moule. N'oubliez pas de piquer le fond avec une fourchette avant de positionner les pommes sur la tarte. Finallement verser la préparation à base d'oeufs et de crême fraîche. Laisser cuire au four pendant 30 minutes.",
       "appliance": "Four",
       "ustensils": ["Moule à tarte", "Saladier", "Fourchette"]
     },
@@ -289,12 +289,12 @@
           "quantity": 2
         },
         {
-          "ingredient": "Sucre en Poudre",
+          "ingredient": "Sucre en poudre",
           "quantity": "110",
           "unit": "g"
         },
         {
-          "ingredient": "farine",
+          "ingredient": "Farine",
           "quantity": 90,
           "unit": "g"
         }
@@ -326,7 +326,7 @@
           "ingredient": "Vinaigre Balsamic"
         },
         {
-          "ingredient": "Huile d'olive"
+          "ingredient": "Huile d'olives"
         },
         {
           "ingredient": "Basilic"
@@ -395,11 +395,11 @@
           "unit": "tranches"
         },
         {
-          "ingredient": "Pommes",
+          "ingredient": "Pomme",
           "quantity": 1
         },
         {
-          "ingredient": "Salade Verte",
+          "ingredient": "Salade verte",
           "quantity": 1
         },
         {
@@ -425,7 +425,7 @@
           "unit": "g"
         },
         {
-          "ingredient": "Pommes",
+          "ingredient": "Pomme",
           "quantity": 8
         },
         {
@@ -470,13 +470,13 @@
           "unit": "cuillère à soupe"
         },
         {
-          "ingredient": "huile d'olive",
+          "ingredient": "Huile d'olives",
           "quantity": 2,
           "unit": "cuillère à soupe"
         }
       ],
       "time": 40,
-      "description": "Cuire les pommes de terre environ 30 minutes. Découper les échalottes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olive et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
+      "description": "Cuire les pommes de terre environ 30 minutes. Découper les échalottes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olives et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
       "appliance": "Casserole",
       "ustensils": ["Couteau", "Saladier", "Cuillère en bois"]
     },
@@ -586,7 +586,7 @@
           "unit": "tiges"
         },
         {
-          "ingredient": "huile d'olives",
+          "ingredient": "Huile d'olives",
           "quantity": 2,
           "unit": "cuillère à soupe"
         }
@@ -706,7 +706,7 @@
           "unit": "g"
         },
         {
-          "ingredient": "Crème fraiche",
+          "ingredient": "Crème fraîche",
           "quantity": 200,
           "unit": "g"
         },
@@ -716,13 +716,13 @@
           "unit": "g"
         },
         {
-          "ingredient": "huile d'olive",
+          "ingredient": "Huile d'olives",
           "quantity": 1,
           "unit": "cuillères à soupe"
         }
       ],
       "time": 30,
-      "description": "Faire cuire les pates comme indiqué sur le paquet. Dorer les lardons dans une sauteuse avec l'huile d'olive. Ajouter la crême fraiche et baisser le feu au minimum. Quand les Tagliatelles sont prêtes les mettre dans la sauteuse et bien mélanger le tout en ajoutant le jaune d'oeuf. Servir et ajouter le parmesan râpé.",
+      "description": "Faire cuire les pates comme indiqué sur le paquet. Dorer les lardons dans une sauteuse avec l'huile d'olives. Ajouter la crême fraîche et baisser le feu au minimum. Quand les Tagliatelles sont prêtes les mettre dans la sauteuse et bien mélanger le tout en ajoutant le jaune d'oeuf. Servir et ajouter le parmesan râpé.",
       "appliance": "Sauteuse",
       "ustensils": ["Râpe à fromage", "Cuillère en bois"]
     },
@@ -742,7 +742,7 @@
           "quantity": 2
         },
         {
-          "ingredient": "Coulis de tomate",
+          "ingredient": "Coulis de tomates",
           "quantity": 300,
           "unit": "g"
         },
@@ -757,13 +757,13 @@
           "unit": "cl"
         },
         {
-          "ingredient": "Crème Fraiche",
+          "ingredient": "Crème fraîche",
           "quantity": 1,
           "unit": "cuillères à soupe"
         }
       ],
       "time": 30,
-      "description": "Cuisiner la viande hachée dans une poêle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Servir.",
+      "description": "Cuisiner la viande hachée dans une poêle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Servir.",
       "appliance": "Casserole",
       "ustensils": ["Cuillère en bois", "Louche", "Couteau"]
     },
@@ -829,7 +829,7 @@
           "quantity": 3
         },
         {
-          "ingredient": "Crème Fraîche",
+          "ingredient": "Crème fraîche",
           "quantity": 20,
           "unit": "cl"
         },
@@ -1045,14 +1045,14 @@
           "quantity": 2
         },
         {
-          "ingredient": "Huile d'olive"
+          "ingredient": "Huile d'olives"
         },
         {
           "ingredient": "Paprika"
         }
       ],
       "time": 30,
-      "description": "Prendre les pois chiches, les mettre dans le Mixeur avec de l'huile d'olive, ajouter le jus des 2 citrons et du paprika selon le gout.",
+      "description": "Prendre les pois chiches, les mettre dans le Mixeur avec de l'huile d'olives, ajouter le jus des 2 citrons et du paprika selon le gout.",
       "appliance": "Mixeur",
       "ustensils": ["Cuillère en bois", "Presse-citron"]
     },
@@ -1102,7 +1102,7 @@
           "unit": "g"
         },
         {
-          "ingredient": "Petits poids",
+          "ingredient": "Petits pois",
           "quantity": 100,
           "unit": "g"
         },
@@ -1155,7 +1155,7 @@
         }
       ],
       "time": 20,
-      "description": "Beurrer les tranches de pain, ajouter entre 2 tranches de pain de mie 1 tranche d'émental, une de blanc de dinde, et une autre d'emmental. Dans un récipient, mélanger le gruyère rappé avec le lait et la noix de muscade. Mettre sur les croque monsieux. Placer au four durnat 10 minutes.",
+      "description": "Beurrer les tranches de pain, ajouter entre 2 tranches de pain de mie 1 tranche d'émental, une de blanc de dinde, et une autre d'emmental. Dans un récipient, mélanger le gruyère râpé avec le lait et la noix de muscade. Mettre sur les croque monsieux. Placer au four durnat 10 minutes.",
       "appliance": "Four",
       "ustensils": ["Râpe à fromage", "Cuillère à Soupe", "Couteau"]
     },
@@ -1171,7 +1171,7 @@
           "unit": "tranches"
         },
         {
-          "ingredient": "Saumon Fumé",
+          "ingredient": "Saumon fumé",
           "quantity": 4,
           "unit": "tranches"
         },
@@ -1212,7 +1212,7 @@
           "unit": "cl"
         },
         {
-          "ingredient": "Huile d'olive"
+          "ingredient": "Huile d'olives"
         },
         {
           "ingredient": "Orange",
@@ -1220,7 +1220,7 @@
         }
       ],
       "time": 25,
-      "description": "Eplucher les patates douces et coupez les en morceaux. Les faire cuire durant 20 minute dans une casserole d'eau bouillante. Passer au Mixeur en ajoutant la crème et l'huile d'olive à son gout. Salez, poivrez. Pressez l'orange et ajouter le jus à l'ensemble; Servir!",
+      "description": "Eplucher les patates douces et coupez les en morceaux. Les faire cuire durant 20 minute dans une casserole d'eau bouillante. Passer au Mixeur en ajoutant la crème et l'huile d'olives à son gout. Salez, poivrez. Pressez l'orange et ajouter le jus à l'ensemble; Servir!",
       "appliance": "Mixeur",
       "ustensils": ["Couteau", "Économe", "Cuillère en bois"]
     },
@@ -1300,7 +1300,7 @@
         }
       ],
       "time": 35,
-      "description": "Raper les courgette et les faire revenir durant 15 minutes. Ajouter les fromages de chèvre frais. Préparer la béchamelle avec le lait et la maizena. Salez poivrez, ajouter de la noix de muscade selon les gouts. Dans un plat, mettre un peu de sauces au fond, puis des lasagnes, puis des courgettes etc... terminer par de la sauces et ajouter le gruiyère. Passer au four à 180° durant 20 à 25 minutes.",
+      "description": "Raper les courgette et les faire revenir durant 15 minutes. Ajouter les fromages de chèvre frais. Préparer la béchamelle avec le lait et la maizena. Salez poivrez, ajouter de la noix de muscade selon les gouts. Dans un plat, mettre un peu de sauces au fond, puis des lasagnes, puis des courgettes etc... terminer par de la sauces et ajouter le gruyère. Passer au four à 180° durant 20 à 25 minutes.",
       "appliance": "Four",
       "ustensils": ["Plat à gratin", "Râpe à fromage", "Fouet"]
     },
@@ -1340,7 +1340,7 @@
         }
       ],
       "time": 60,
-      "description": "Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olive. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé.",
+      "description": "Couper les courgettes dans le sens de la longueur. Vider les courgette dans un saladier. Réserver.Faire revenir la chair des courgettes dans 25cl d'huile d'olives. Ajouter l'oignon puis la viande hachée. Mettre la farce dans les courgettes. Ajouter le coulis de tomates. Mettre au four pendant 30 minutes. Avant la fin de la cuisson ajouter le fromage rapé.",
       "appliance": "Four",
       "ustensils": ["Couteau", "Cuillère en bois", "Poêle à frire"]
     },
@@ -1418,7 +1418,7 @@
           "unit": "Litres"
         },
         {
-          "ingredient": "Citron Vert",
+          "ingredient": "Citron vert",
           "quantity": 3
         },
         {
@@ -1554,7 +1554,7 @@
           "unit": "g"
         },
         {
-          "ingredient": "farine",
+          "ingredient": "Farine",
           "quantity": 40,
           "unit": "g"
         }
@@ -1658,13 +1658,13 @@
           "unit": "g"
         },
         {
-          "ingredient": "Crème Fraîche",
+          "ingredient": "Crème fraîche",
           "quantity": 20,
           "unit": "cl"
         }
       ],
       "time": 5,
-      "description": "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraiche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir!!",
+      "description": "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraîche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir!!",
       "appliance": "Saladier",
       "ustensils": ["Fouet", "Verres", "Cuillère en bois"]
     },
@@ -1711,11 +1711,11 @@
       "servings": 4,
       "ingredients": [
         {
-          "ingredient": "Bananes",
+          "ingredient": "Banane",
           "quantity": 2
         },
         {
-          "ingredient": "Kiwis",
+          "ingredient": "Kiwi",
           "quantity": 3
         },
         {

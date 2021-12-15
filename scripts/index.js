@@ -14,7 +14,7 @@ const secondaryTags = document.querySelector(".secondary__tags");
 
 console.log(mainTags, ingredientsSearch, devicesSearch, ustensilsSearch);
 //Import all Datas of recipes.json
-const recipesArray = [];
+let recipesArray = [];
 console.log(recipesArray);
 //Temporary Variable
 let recipesData = [];
@@ -199,12 +199,7 @@ function retrieveFilters(element) {
 
   for (let i = 0; i < filterUstensils.length; i++) {
     separateUstensils = separateUstensils.concat(filterUstensils[i]);
-
-    separateUstensils.filter(function (ele, pos) {
-      return separateUstensils.indexOf(ele) == pos;
-    });
   }
-  console.log(separateUstensils);
 
   // Variables without duplicates elements
   uniqueFilterDevices = new Set([...filterDevices]);
@@ -219,26 +214,34 @@ function retrieveFilters(element) {
 }
 console.log(filterDevices, filterUstensils, filterIngredients);
 
-/* function creationHtmlTags(element) {
+function creationHtmlTagsContainer() {
   mainTags.innerHTML += `
-                      <div class="tags__${element}"><span class="far fa-times-circle"></span></div>
+                      <div class="tags__ingredients">${incorporateTagsSecondarySearch()}</div>
+                      <div class="tags__devices"></div>
+                      <div class="tags__ustensils"></div>
   `;
-} */
+}
+creationHtmlTagsContainer();
 
 function incorporateTagsSecondarySearch() {
   ingredientsSearch.innerHTML += `
+                            <div>
                               <ul class="secondary__tags tag">
-                                
+                              ${liTags(uniqueFilterIngredients)}
                               </ul>
+                            </div>
   `;
+}
+incorporateTagsSecondarySearch();
+
+function liTags(element) {
+  for (let i = 0; i < element.length; i++) {
+    secondaryTags.innerHTML += `
+                            <li class="tag__ingredient">${element[i]}</li>
+    `;
+  }
 }
 
-function liTags() {
-  for
-  secondaryTags.innerHTML += `
-                          <li class=""></li>
-  `;
-}
 //+++++++++++++++
 // Instructions++
 //+++++++++++++++
