@@ -6,9 +6,11 @@
 }
 
 @mixin tags {
-  width: 110px;
   border-radius: 5px;
   color: white;
+  margin: 0.5rem 1rem 0 0;
+  font-size: 14px;
+  padding: 0.5rem;
 }
 
 * {
@@ -55,7 +57,7 @@ body {
 
   &__icon {
     position: absolute;
-    top: 0.9rem;
+    top: 1.1rem;
     right: 0.7rem;
     border: none;
     color: white;
@@ -65,10 +67,11 @@ body {
   }
   &__search {
     width: 100%;
-    height: 100%;
+    height: 3rem;
     padding-left: 0.5rem;
     border-radius: 5px;
     border: none;
+    font-size: 18px;
   }
 }
 
@@ -135,6 +138,7 @@ body {
   height: 364px;
   margin-bottom: 1rem;
   text-overflow: ellipsis;
+  z-index: -1;
   &__image {
     width: 100%;
     height: auto;
@@ -180,22 +184,73 @@ body {
 
 .tags {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  margin: 0.2rem 0 0.2rem 1rem;
   &__ingredients {
-    @include tags;
+    @include tags();
     background-color: #3282f7;
   }
   &__devices {
-    @include tags;
+    @include tags();
     background-color: #68d9a4;
   }
   &__ustensils {
-    @include tags;
+    @include tags();
     background-color: #ed6454;
+  }
+  &__icon {
+    margin-left: 0.2rem;
   }
 }
 
+#ingredientDiv {
+  display: none;
+  width: 40rem;
+  border-radius: 5px;
+  background-color: #3282f7;
+  z-index: 2;
+  color: white;
+}
+#deviceDiv {
+  display: none;
+  width: 40rem;
+  border-radius: 5px;
+  background-color: #68d9a4;
+  z-index: 2;
+  color: white;
+}
+#ustensilDiv {
+  display: none;
+  width: 40rem;
+  border-radius: 5px;
+  background-color: #ed6454;
+  color: white;
+}
+
+.li {
+  display: grid;
+  grid-template-columns: repeat(3, 14rem);
+}
+
+.element {
+  margin: 0.3rem 0.5rem;
+}
+
+#ingredientDiv.isVisible,
+#ustensilDiv.isVisible,
+#deviceDiv.isVisible {
+  display: block;
+}
+
+@media only screen and (max-width: 769px) {
+  .secondary {
+    &__search {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
 @media only screen and (max-width: 769px) {
   .card {
     width: 48%;
@@ -224,6 +279,12 @@ body {
   }
 }
 
+@media only screen and (max-width: 426px) {
+  .secondary {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 376px) {
   .input {
     display: block;
@@ -236,7 +297,6 @@ body {
   }
 
   .secondary {
-    width: 100%;
     margin: 0.5rem 0;
   }
 

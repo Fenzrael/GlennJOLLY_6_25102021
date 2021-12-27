@@ -10,9 +10,35 @@ const userMainSearch = document.querySelector(".main__search");
 const ingredientsSearch = document.getElementById("ingredients");
 const devicesSearch = document.getElementById("devices");
 const ustensilsSearch = document.getElementById("ustensils");
-const secondaryTags = document.querySelector(".secondary__tags");
+const secondaryList = document.querySelector(".secondary__list");
 
-console.log(mainTags, ingredientsSearch, devicesSearch, ustensilsSearch);
+// Variables catch tag
+
+const listDevice = document.querySelector(".list__devices");
+const listIngredient = document.querySelector(".list__ingredients");
+const listUstensil = document.querySelector(".list__ustensils");
+
+const inputIngredients = document.querySelector(".input__ingredients");
+const inputUstensils = document.querySelector(".input__ustensils");
+const inputDevices = document.querySelector(".input__devices");
+
+const ingDiv = document.getElementById("ingredientDiv");
+const ustDiv = document.getElementById("ustensilDiv");
+const devDiv = document.getElementById("deviceDiv");
+
+const tagsIngredients = document.querySelector(".tags__ingredients");
+const tagsDevices = document.querySelector(".tags__devices");
+const tagsUstensils = document.querySelector(".tags__ustensils");
+const tagsIcon = document.querySelector(".tags__icon");
+
+// Variables Storage temporary elements for filter tags
+let filterDevices = [];
+let filterUstensils = [];
+let filterIngredients = [];
+
+let uniqueFilterDevices, uniqueFilterIngredients, uniqueFilterUstensils;
+let separateUstensils = [];
+
 //Import all Datas of recipes.json
 let recipesArray = [];
 console.log(recipesArray);
@@ -128,13 +154,8 @@ function retrieveDatas(element) {
   datasLowerCase = titlesArray.concat(ingredientsArray, descriptionsArray);
   return true;
 }
-// console.log(titlesArray, ingredientsArray, descriptionsArray);
 
-// Creation Variables storage type by user in Search input
-
-// let datasTypeByUser = [];
-// let datasComparison = [];
-
+// implementation Primary Search
 userMainSearch.addEventListener("input", compareDatasMainSearch);
 
 function compareDatasMainSearch(event) {
@@ -156,8 +177,9 @@ function compareDatasMainSearch(event) {
         const currentIngredientName =
           recipe.ingredients[i].ingredient.toLowerCase();
         if (currentIngredientName.includes(value)) {
+          compareDatasSecondarySearch(value);
           includeInIngredient = true; // if true ingredient type by user include
-          break;
+          break; // Loop ending
         }
       }
 
@@ -178,16 +200,7 @@ function compareDatasMainSearch(event) {
 // Recherche secondaire++
 //+++++++++++++++++++++++
 
-// Variables Storage temporary elements for filter tags
-let filterDevices = [];
-let filterUstensils = [];
-let filterIngredients = [];
-
-let uniqueFilterDevices;
-let uniqueFilterUstensils = [];
-let uniqueFilterIngredients = [];
-let separateUstensils = [];
-
+//
 function retrieveFilters(element) {
   for (let i = 0; i < element.length; i++) {
     filterDevices.push(element[i].appliance);
@@ -196,7 +209,7 @@ function retrieveFilters(element) {
       filterIngredients.push(ingredient.ingredient)
     );
   }
-
+  // Loop for: concatenation elements on one array
   for (let i = 0; i < filterUstensils.length; i++) {
     separateUstensils = separateUstensils.concat(filterUstensils[i]);
   }
@@ -206,41 +219,103 @@ function retrieveFilters(element) {
   uniqueFilterUstensils = new Set([...separateUstensils]);
   uniqueFilterIngredients = new Set([...filterIngredients]);
 
-  console.log(
-    uniqueFilterDevices,
-    uniqueFilterIngredients,
-    uniqueFilterUstensils
-  );
-}
-console.log(filterDevices, filterUstensils, filterIngredients);
+  liTags(uniqueFilterDevices, "devices");
+  liTags(uniqueFilterIngredients, "ingredients");
+  liTags(uniqueFilterUstensils, "ustensils");
 
-/* function creationHtmlTagsContainer() {
-  mainTags.innerHTML += `
-                      <div class="tags__ingredients">${incorporateTagsSecondarySearch()}</div>
-                      <div class="tags__devices"></div>
-                      <div class="tags__ustensils"></div>
-  `;
+  /* console.log(uniqueFilterIngredients); */
 }
-creationHtmlTagsContainer();
 
-function incorporateTagsSecondarySearch() {
-  ingredientsSearch.innerHTML += `
-                            <div>
-                              <ul class="secondary__tags tag">
-                              ${liTags(uniqueFilterIngredients)}
-                              </ul>
-                            </div>
-  `;
+// Creation List Elements for secondary Search
+function liTags(element, type) {
+  const elementCible = document.querySelector(`.list__${type}`);
+
+  elementCible.innerHTML = "";
+
+  element.forEach((elt) => {
+    // Creation List
+    const li = document.createElement("li");
+    const liAdd = li.classList;
+    liAdd.add(`li__${type}`);
+    liAdd.add("element");
+    li.textContent = elt;
+    elementCible.appendChild(li);
+    // Creation Tags
+    li.addEventListener("click", (event) => {
+      mainTags.innerHTML += `
+        <div class="tags__${type}">
+          ${event.target.innerText}
+          <span class="far fa-times-circle tags__icon"></span>
+        </div>
+      `;
+    });
+  });
+  console.log(tagsIcon);
 }
-incorporateTagsSecondarySearch();
 
-function liTags(element) {
-  for (let i = 0; i < element.length; i++) {
-    secondaryTags.innerHTML += `
-                            <li class="tag__ingredient">${element[i]}</li>
-    `;
+// Element Secondary Search appear
+function displayDivElements(input, type) {
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === "Escape") {
+      type.classList.remove("isVisible");
+    }
+  });
+  input.addEventListener("click", (e) => {
+    type.classList.add("isVisible");
+  });
+  window.addEventListener("click", (e) => {
+    if (e.target.className !== "secondary__search") {
+      type.classList.remove("isVisible");
+    }
+  });
+}
+displayDivElements(inputIngredients, ingDiv);
+displayDivElements(inputUstensils, ustDiv);
+displayDivElements(inputDevices, devDiv);
+
+// Implementation Secondary Search
+ingredientsSearch.addEventListener("input", (event) => {
+  compareDatasSecondarySearch(event.target.value.toLowerCase());
+});
+devicesSearch.addEventListener("input", (event) => {
+  compareDatasSecondarySearch(event.target.value.toLowerCase());
+});
+ustensilsSearch.addEventListener("input", (event) => {
+  compareDatasSecondarySearch(event.target.value.toLowerCase());
+});
+
+function compareDatasSecondarySearch(value) {
+  let currentSearchIngredient = [];
+  let currentSearchDevice = [];
+  let currentSearchUstensil = [];
+
+  for (const ingredient of uniqueFilterIngredients) {
+    const includeInIngredients = ingredient.toLowerCase().includes(value);
+
+    if (includeInIngredients) {
+      currentSearchIngredient.push(ingredient);
+    }
   }
-} */
+
+  for (const device of uniqueFilterDevices) {
+    const includeInDevice = device.toLowerCase().includes(value);
+
+    if (includeInDevice) {
+      currentSearchDevice.push(device);
+    }
+  }
+
+  for (const ustensil of uniqueFilterUstensils) {
+    const includeInUstensil = ustensil.toLowerCase().includes(value);
+
+    if (includeInUstensil) {
+      currentSearchUstensil.push(ustensil);
+    }
+  }
+  liTags(currentSearchIngredient, "ingredients");
+  liTags(currentSearchDevice, "devices");
+  liTags(currentSearchUstensil, "ustensils");
+}
 
 //+++++++++++++++
 // Instructions++
