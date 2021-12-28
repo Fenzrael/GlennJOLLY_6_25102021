@@ -11,6 +11,7 @@ const ingredientsSearch = document.getElementById("ingredients");
 const devicesSearch = document.getElementById("devices");
 const ustensilsSearch = document.getElementById("ustensils");
 const secondaryList = document.querySelector(".secondary__list");
+const secondaryIcon = document.querySelector(".secondary__icon");
 
 // Variables catch tag
 
@@ -30,6 +31,8 @@ const tagsIngredients = document.querySelector(".tags__ingredients");
 const tagsDevices = document.querySelector(".tags__devices");
 const tagsUstensils = document.querySelector(".tags__ustensils");
 const tagsIcon = document.querySelector(".tags__icon");
+
+let listTags = [];
 
 // Variables Storage temporary elements for filter tags
 let filterDevices = [];
@@ -200,7 +203,7 @@ function compareDatasMainSearch(event) {
 // Recherche secondaire++
 //+++++++++++++++++++++++
 
-//
+// Function retrieve filters
 function retrieveFilters(element) {
   for (let i = 0; i < element.length; i++) {
     filterDevices.push(element[i].appliance);
@@ -222,8 +225,6 @@ function retrieveFilters(element) {
   liTags(uniqueFilterDevices, "devices");
   liTags(uniqueFilterIngredients, "ingredients");
   liTags(uniqueFilterUstensils, "ustensils");
-
-  /* console.log(uniqueFilterIngredients); */
 }
 
 // Creation List Elements for secondary Search
@@ -242,15 +243,36 @@ function liTags(element, type) {
     elementCible.appendChild(li);
     // Creation Tags
     li.addEventListener("click", (event) => {
-      mainTags.innerHTML += `
-        <div class="tags__${type}">
-          ${event.target.innerText}
-          <span class="far fa-times-circle tags__icon"></span>
-        </div>
-      `;
+      if (!listTags.find((tag) => event.target.innerText == tag.value)) {
+        listTags.push({
+          value: event.target.innerText,
+          type,
+        });
+        constructMainTagsHtml(listTags);
+      }
     });
   });
-  console.log(tagsIcon);
+}
+
+// Function construction Tags
+function constructMainTagsHtml(list) {
+  mainTags.innerHTML = "";
+  list.forEach((tag) => {
+    mainTags.innerHTML += `
+          <div class="tags__${tag.type}">
+            ${tag.value}
+            <span class="far fa-times-circle tags__icon" onClick="removeTag('${tag.value}')"></span>
+          </div>
+        `;
+  });
+}
+
+// Function remove Tags
+function removeTag(tagLabel) {
+  listTags = listTags.filter((currentTag) => {
+    return currentTag.value != tagLabel;
+  });
+  constructMainTagsHtml(listTags);
 }
 
 // Element Secondary Search appear
@@ -275,19 +297,18 @@ displayDivElements(inputDevices, devDiv);
 
 // Implementation Secondary Search
 ingredientsSearch.addEventListener("input", (event) => {
-  compareDatasSecondarySearch(event.target.value.toLowerCase());
+  compareDatasIngredientSearch(event.target.value.toLowerCase());
 });
 devicesSearch.addEventListener("input", (event) => {
-  compareDatasSecondarySearch(event.target.value.toLowerCase());
+  compareDatasDeviceSearch(event.target.value.toLowerCase());
 });
 ustensilsSearch.addEventListener("input", (event) => {
-  compareDatasSecondarySearch(event.target.value.toLowerCase());
+  compareDatasUstensilSearch(event.target.value.toLowerCase());
 });
 
-function compareDatasSecondarySearch(value) {
+// Function search Ingredients
+function compareDatasIngredientSearch(value) {
   let currentSearchIngredient = [];
-  let currentSearchDevice = [];
-  let currentSearchUstensil = [];
 
   for (const ingredient of uniqueFilterIngredients) {
     const includeInIngredients = ingredient.toLowerCase().includes(value);
@@ -297,6 +318,13 @@ function compareDatasSecondarySearch(value) {
     }
   }
 
+  liTags(currentSearchIngredient, "ingredients");
+}
+
+// Function search Devices
+function compareDatasDeviceSearch(value) {
+  let currentSearchDevice = [];
+
   for (const device of uniqueFilterDevices) {
     const includeInDevice = device.toLowerCase().includes(value);
 
@@ -305,6 +333,13 @@ function compareDatasSecondarySearch(value) {
     }
   }
 
+  liTags(currentSearchDevice, "devices");
+}
+
+// Function search Ustensils
+function compareDatasUstensilSearch(value) {
+  let currentSearchUstensil = [];
+
   for (const ustensil of uniqueFilterUstensils) {
     const includeInUstensil = ustensil.toLowerCase().includes(value);
 
@@ -312,8 +347,7 @@ function compareDatasSecondarySearch(value) {
       currentSearchUstensil.push(ustensil);
     }
   }
-  liTags(currentSearchIngredient, "ingredients");
-  liTags(currentSearchDevice, "devices");
+
   liTags(currentSearchUstensil, "ustensils");
 }
 

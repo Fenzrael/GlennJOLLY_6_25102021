@@ -66,6 +66,7 @@ body {
     border: none;
   }
   &__search {
+    cursor: pointer;
     width: 100%;
     height: 3rem;
     padding-left: 0.5rem;
@@ -200,6 +201,7 @@ body {
     background-color: #ed6454;
   }
   &__icon {
+    cursor: pointer;
     margin-left: 0.2rem;
   }
 }
