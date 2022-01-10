@@ -245,11 +245,17 @@ body {
   display: block;
 }
 
+.element {
+  cursor: pointer;
+}
 @media only screen and (max-width: 769px) {
   .secondary {
     &__search {
       display: flex;
       flex-wrap: wrap;
+    }
+    &__list {
+      display: grid;
     }
   }
 }
