@@ -1,20 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Link CSS-->
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="icon" href="./assets/Img/Logo_Site/logo.svg" />
+
+    <!--Logo Tab-->
+    <link rel="icon" href="./assets/img/Logo_Site/logo.svg" />
+
+    <!--Script FontAwesome-->
     <script
       src="https://kit.fontawesome.com/71f14f71be.js"
       crossorigin="anonymous"
     ></script>
-    <title>Les Petits Plats</title>
-</head>
-<body>
-    <header>
 
+    <!--Lato font Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--DM Sans font Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Title Internet Page-->
+    <title>Les Petits Plats</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <section
+        class="header__presentation presentation"
+        aria-label="Presentation Enterprise"
+      >
+        <img
+          src="./assets/img/Logo_Site/logo.svg"
+          alt="logo"
+          class="presentation__logo"
+        />
+        <h1 class="presentation__title" aria-label="Enterprise Name">
+          Les petits plats
+        </h1>
+      </section>
+
+      <section class="input">
+        <div class="input__main main">
+          <input
+            type="search"
+            placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+            class="main__search"
+          />
+          <span class="fas fa-search main__icon"></span>
+        </div>
+
+        <div class="main__tags tags"></div>
+
+        <div class="input__ingredients secondary">
+          <input
+            type="search"
+            placeholder="Ingredients"
+            id="ingredients"
+            class="secondary__search"
+          />
+          <span class="fas fa-chevron-down secondary__icon"></span>
+          <div class="secondary__list list" id="ingredientDiv">
+            <ul class="list__ingredients li"></ul>
+          </div>
+        </div>
+
+        <div class="input__devices secondary">
+          <input
+            type="search"
+            placeholder="Appareils"
+            id="devices"
+            class="secondary__search"
+          />
+          <span class="fas fa-chevron-down secondary__icon"></span>
+          <div class="secondary__list list" id="deviceDiv">
+            <ul class="list__devices li"></ul>
+          </div>
+        </div>
+
+        <div class="input__ustensils secondary">
+          <input
+            type="search"
+            placeholder="Ustensiles"
+            id="ustensils"
+            class="secondary__search"
+          />
+          <span class="fas fa-chevron-down secondary__icon"></span>
+          <div class="secondary__list list" id="ustensilDiv">
+            <ul class="list__ustensils li"></ul>
+          </div>
+        </div>
+      </section>
     </header>
-</body>
+    <main id="main">
+      <section id="recipes" class="recipes"></section>
+    </main>
+    <script type="text/javascript" src="./scripts/script.js"></script>
+  </body>
 </html>
