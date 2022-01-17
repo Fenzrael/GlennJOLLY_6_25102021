@@ -66,7 +66,6 @@ const recipesDisplay = async () => {
   recipesData.recipes.forEach((recipe) => {
     recipesArray.push(recipe);
   });
-  retrieveDatas(recipesArray);
   retrieveFilters(recipesArray);
   recipesRemaining = recipesArray;
 };
@@ -134,32 +133,13 @@ function changePlaceholderInputMainSearch() {
 
 window.addEventListener("resize", changePlaceholderInputMainSearch);
 
-//++++++++++++++++++++++++++++++++++++++++++
-// Algorithme de recherche 1 (boucle for):++
-//++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Algorithme de recherche 2 (boucle forEach et Filter):++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //+++++++++++++++++++++++
 // Recherche principale++
 //+++++++++++++++++++++++
-
-// Creation Variables storage: (titles, ingredients, descriptions) of recipes
-
-let titlesArray = [];
-let ingredientsArray = [];
-let descriptionsArray = [];
-
-// Filling Variables storage
-function retrieveDatas(element) {
-  for (let i = 0; i < element.length; i++) {
-    titlesArray.push(element[i].name.toLowerCase());
-    element[i].ingredients.forEach((ingredient) =>
-      ingredientsArray.push(ingredient.ingredient.toLowerCase())
-    );
-    descriptionsArray.push(element[i].description.toLowerCase());
-  }
-  datasLowerCase = titlesArray.concat(ingredientsArray, descriptionsArray);
-  return true;
-}
 
 // implementation Primary Search
 userMainSearch.addEventListener("input", compareDatasMainSearch);
@@ -170,17 +150,15 @@ function compareDatasMainSearch(event) {
   recipesRemaining = [];
 
   if (value.length >= 3) {
+    mainTags.innerText = "";
     recipesHTML.innerHTML = "";
-    for (let i = 0; i < recipesArray.length; i++) {
-      const recipe = recipesArray[i];
-      const includeInName = recipe.name.toLowerCase().includes(value); // includes (methode native Js verifiant si c'est inclut)
+
+    recipesArray.filter((recipe) => {
+      const includeInName = recipe.name.toLowerCase().includes(value);
       const includeInDescription = recipe.description
         .toLowerCase()
         .includes(value);
-
-      // initialize at false(0 ingredient)
       let includeInIngredient = false;
-
       for (let i = 0; i < recipe.ingredients.length; i++) {
         const currentIngredientName =
           recipe.ingredients[i].ingredient.toLowerCase();
@@ -192,20 +170,21 @@ function compareDatasMainSearch(event) {
 
       if (includeInName || includeInIngredient || includeInDescription) {
         recipesHTML.innerHTML += constructArticleHTML(recipe);
-
         recipesRemaining.push(recipe);
-
         retrieveFilters(recipesRemaining);
-      } else {
-        /* recipesHTML.innerHTML = "";
-        mainTags.innerText = `Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.`; */
       }
-
-      // if (datasLowerCase[i].includes(event.target.value.toLowerCase())) {
-      //   datasTypeByUser.push(datasLowerCase[i]);
-      //   recipesHTML.innerHTML += constructMediaHtml(datasTypeByUser);
-      // }
-    }
+    });
+    mainTags.innerText =
+      0 >= recipesRemaining.length
+        ? ` Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.`
+        : "";
+  } else if (value.length === 0) {
+    recipesHTML.innerHTML = "";
+    recipesArray.forEach((recipe) => {
+      recipesHTML.innerHTML += constructArticleHTML(recipe);
+      recipesRemaining.push(recipe);
+      retrieveFilters(recipesRemaining);
+    });
   }
 }
 
@@ -220,17 +199,18 @@ function retrieveFilters(element) {
   filterUstensils = [];
   separateUstensils = [];
 
-  for (let i = 0; i < element.length; i++) {
-    filterDevices.push(element[i].appliance);
-    filterUstensils.push(element[i].ustensils);
-    element[i].ingredients.forEach((ingredient) =>
+  element.forEach((elt) => {
+    filterDevices.push(elt.appliance);
+    filterUstensils.push(elt.ustensils);
+    elt.ingredients.forEach((ingredient) =>
       filterIngredients.push(ingredient.ingredient)
     );
-  }
-  // Loop for: concatenation elements on one array
-  for (let i = 0; i < filterUstensils.length; i++) {
-    separateUstensils = separateUstensils.concat(filterUstensils[i]);
-  }
+  });
+
+  // Loop forEach: concatenation elements on one array
+  filterUstensils.forEach(
+    (ust) => (separateUstensils = separateUstensils.concat(ust))
+  );
 
   // Variables without duplicates elements
   uniqueFilterDevices = new Set([...filterDevices]);
@@ -262,6 +242,7 @@ function liTags(element, type) {
         listTags.push({
           value: event.target.innerText,
           type,
+          id: listTags.length + 1,
         });
         constructMainTagsHtml(listTags);
         filterByTag(listTags);
@@ -271,22 +252,23 @@ function liTags(element, type) {
 }
 
 // Function construction Tags
+
 function constructMainTagsHtml(list) {
   mainTags.innerHTML = "";
   list.forEach((tag) => {
     mainTags.innerHTML += `
           <div class="tags__${tag.type}">
             ${tag.value}
-            <span class="far fa-times-circle tags__icon" onClick="removeTag('${tag.value}')"></span>
+            <span class="far fa-times-circle tags__icon"  onClick="removeTag('${tag.id}')"></span>
           </div>
         `;
   });
 }
 
 // Function remove Tags
-function removeTag(tagLabel) {
+function removeTag(tagId) {
   listTags = listTags.filter((currentTag) => {
-    return currentTag.value != tagLabel;
+    return currentTag.id != tagId;
   });
   constructMainTagsHtml(listTags);
   filterByTag(listTags);
@@ -294,7 +276,6 @@ function removeTag(tagLabel) {
 
 // Function Filter by tag (Update)
 function filterByTag(tagList) {
-  console.log(tagList);
   let newRecipesArray = [];
   recipesHTML.innerHTML = "";
   recipesRemaining = [...recipesArray];
@@ -303,55 +284,51 @@ function filterByTag(tagList) {
       recipesHTML.innerHTML += constructArticleHTML(currentRecipe);
     });
   } else {
-    for (let i = 0; i < tagList.length; i++) {
-      const currentTag = tagList[i];
+    tagList.filter((currentTag) => {
       newRecipesArray = [];
       recipesHTML.innerHTML = "";
-      for (let j = 0; j < recipesRemaining.length; j++) {
-        const currentRecipe = recipesRemaining[j];
+
+      recipesRemaining.filter((currentRecipe) => {
         if (
           currentTag.type === "ingredients" &&
           currentRecipe.ingredients.find((ingredient) => {
             return currentTag.value === ingredient.ingredient;
           })
         ) {
-          console.log(currentRecipe);
           newRecipesArray.push(currentRecipe);
           recipesHTML.innerHTML += constructArticleHTML(currentRecipe);
         } else if (
           currentTag.type === "devices" &&
           currentRecipe.appliance === currentTag.value
         ) {
-          console.log(currentRecipe);
           newRecipesArray.push(currentRecipe);
           recipesHTML.innerHTML += constructArticleHTML(currentRecipe);
         } else if (
           currentTag.type === "ustensils" &&
           currentRecipe.ustensils.includes(currentTag.value)
         ) {
-          console.log(currentRecipe);
           newRecipesArray.push(currentRecipe);
           recipesHTML.innerHTML += constructArticleHTML(currentRecipe);
         }
-      }
-      recipesRemaining = newRecipesArray;
-    }
+
+        recipesRemaining = newRecipesArray;
+      });
+    });
   }
-  console.log(recipesRemaining);
   retrieveFilters(recipesRemaining);
 }
 
 // Function remove Filter tag (Update)
 function removeFilterTag(currentFilterTag) {
   let currentTagsArray = [];
-  for (let i = 0; i < currentFilterTag.length; i++) {
-    let currentTag = currentFilterTag[i];
+
+  currentFilterTag.filter((currentTag) => {
     if (listTags.includes(currentTag)) {
       currentTagsArray.push(currentTag);
       currentTagsArray.splice(currentTagsArray.indexOf(currentTag, 1));
     }
     recipesRemaining = currentTagsArray;
-  }
+  });
   retrieveFilters(listTags);
 }
 
@@ -458,84 +435,3 @@ function compareDatasUstensilSearch(value) {
 
   liTags(currentSearchUstensil, "ustensils");
 }
-
-//+++++++++++++++
-// Instructions++
-//+++++++++++++++
-
-// Recherche par mots ou groupe de lettres dans le titre, les ingredients ou la description.
-
-//Scénario nominal++
-//++++++++++++++++++
-
-// 1. Le cas d’utilisation commence lorsque l’utilisateur entre au moins 3 caractères dans la barre de recherche principale.
-
-// 2. Le système recherche des recettes correspondant à l’entrée utilisateur dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette.
-
-// 3. L’interface est actualisée avec les résultats de recherche.
-
-// 4. Les champs de recherche avancée sont actualisés avec les informations ingrédients, ustensiles, appareil des différentes recettes restantes.
-
-//5. L’utilisateur précise sa recherche grâce à l’un des champs : ingrédients, ustensiles, appareil.
-
-// 6. Au fur et à mesure du remplissage les mots clés ne correspondant pas à la frappe dans le champ disparaissent. Par exemple, si l’utilisateur entre “coco” dans la liste d’ingrédients, seuls vont rester “noix de coco” et “lait de coco”.
-
-// 7. L’utilisateur choisit un mot clé dans le champ.
-
-// 8. Le mot clé apparaît sous forme de tag sous la recherche principale.
-
-// 9. Les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée.
-
-// 10. L’utilisateur sélectionne une recette.
-
-//Scénario alternatif A1: Aucune recette correspondante à la recherche++
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-// L'enchaînement A1 commence au point 3 du scénario nominal.
-
-// 3. L’interface affiche « Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.
-
-//Scénario alternatif A2: L’utilisateur commence sa recherche par un tag++
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-//L'enchaînement A2 commence au point 1 du scénario nominal et reprend au point 9 du scénario nominal.
-
-// 1. L’utilisateur commence la recherche par un tag.
-// 2. Les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée (9 du cas principal).
-
-//Scénario alternatif A3: L’utilisateur ajoute d’autres tags pour la recherche avancée++
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-//L'enchaînement A3 commence au point 9 du scénario nominal. Cet enchaînement peut se répéter autant que nécessaire.
-
-// 10. L’utilisateur précise sa recherche grâce à l’un des champs : ingrédients, ustensiles, appareil.
-
-// 11. Au fur et à mesure du remplissage les mots clés ne correspondant pas à la frappe dans le champ disparaissent.
-
-// 12. L’utilisateur choisit un mot clé dans le champ.
-
-// 13. Le mot clé apparaît sous forme de tag sous la recherche principale.
-
-// 14. Les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée.
-
-//+++++++++++++++++++
-//Règles de gestion++
-//+++++++++++++++++++
-
-// Ces points doivent absolument être respectés durant le développement :
-
-// 1. La recherche doit pouvoir se faire via le champ principal ou via les tags (ingrédients, ustensiles ou appareil).
-
-// 2. La recherche principale se lance à partir de 3 caractères entrés par l’utilisateur dans la barre de recherche.
-
-// 3. La recherche s’actualise pour chaque nouveau caractère entré.
-
-// 4. La recherche principale affiche les premiers résultats le plus rapidement possible.
-
-// 5. Les champs ingrédients, ustensiles et appareil de la recherche avancée proposent seulement les éléments restant dans les recettes présentes sur la page.
-
-// 6. Les retours de recherche doivent être une intersection des résultats. Si l’on ajoute les tags “coco” et “chocolat” dans les ingrédients, on doit récupérer les recettes qui ont à la fois de la coco et du chocolat.
-
-// 7. Comme pour le reste du site, le code HTML et CSS pour l’interface (avec ou sans Bootstrap) devra passer avec succès le validateur W3C.
-
-// 8. Aucune librairie ne sera utilisée pour le JavaScript du moteur de recherche.
