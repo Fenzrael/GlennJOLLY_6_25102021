@@ -49,7 +49,6 @@ let recipesArray = [];
 console.log(recipesArray);
 //Temporary Variable
 let recipesData = [];
-let datasLowerCase;
 
 //Import data of recipes.json
 
@@ -79,6 +78,7 @@ function constructMediaHtml() {
     });
   });
 }
+
 constructMediaHtml();
 // function creation Article(Recipe Card) create because forEach constructMediaHtml
 // do bug loop "for" for search main
